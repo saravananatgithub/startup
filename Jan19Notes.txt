@@ -1,0 +1,44 @@
+package p1;
+
+Class Test {
+
+
+private String firstName;
+
+protected  String LastName;
+
+String  city;
+
+
+static int ticketNumber;
+
+static int manufacturedBusNo = 1;
+
+
+public static void main(String args[]) {
+    obj1 = new Test();
+	sop(obj1.LastName); -- this works as we are accessing it after creating an object
+	sop(LastName);  -- fails compilaton since it is a object variable , needs an object to access 
+   sop(ticketNumber); -- this works since it is static
+
+}
+
+
+
+
+}
+
+-----------------------------------------------------
+
+package p2;
+
+public class Test1 imports Test {
+
+
+
+public method accessLastName(){
+ sop(LastName)
+
+}
+
+}
