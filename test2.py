@@ -1,47 +1,86 @@
-import json
-from jsonpath_ng.ext import parse
+import pandas as pd
 
-# Sample JSON data
-json_data = '''
-[
-  {
-   "class" : "price",
-   "objects" : [
-    {
-        "name": "Alice",
-        "info": {
-            "age": 25,
-            "cities": ["New York", "Los Angeles"]
-        }
-    },
-    {
-        "name": "Bob",
-        "info": {
-            "age": 30,
-            "cities": ["San Francisco", "Chicago"]
-        }
-    },
-    {
-        "name": "Charlie",
-        "info": {
-            "age": 25,
-            "cities": ["Boston", "Seattle"]
-        }
-    }
-    
-    ]
-   }
-]
-'''
+# Creating a dictionary
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie',None],
+    'Age': [25, 30, 35, 48],
+    'City': ['New York', 'San Francisco', 'Chicago',None]
+}
 
-# Load JSON data
-data = json.loads(json_data)
+# Creating a DataFrame
+df = pd.DataFrame(data)
 
-# Define jsonpath expression to match key-value pair
-jsonpath_expr = parse('$[0].objects[?(@.name == "Bob")].info.age')
+# Displaying the DataFrame
+print(df)
 
-# Extract data using jsonpath
-matches = [match.value for match in jsonpath_expr.find(data)]
+# Accessing a single column
+names = df['Name']
+print(names)
 
-# Print extracted data
-print(matches)
+# Accessing multiple columns
+ages_and_cities = df[['Age', 'City']]
+print(ages_and_cities)
+
+# Accessing rows by index
+first_row = df.iloc[0]
+print(first_row)
+
+# Accessing rows by label
+alice_row = df.loc[df['Name'] == 'Alice']
+print(alice_row)
+
+print("-----------------------")
+morethan30 = df[df['Age'] > 29]
+print(morethan30)
+print("-----------------------")
+
+
+print("-----------------------")
+morethan30 = df[df['Name'].notna()][df['Age'] > 29]
+print(morethan30)
+print("---------#######################--------------")
+
+
+
+# Sample DataFrames
+df1 = pd.DataFrame({
+    'A': ['A0', 'A1', 'A2'],
+    'B': ['B0', 'B1', 'B2']
+})
+
+df2 = pd.DataFrame({
+    'A': ['A3', 'A4', 'A5'],
+    'B': ['B3', 'B4', 'B5']
+})
+
+# Concatenate DataFrames by rows
+result = pd.concat([df1, df2], axis=0)
+
+# Display the result
+print(result)
+
+print("---------###########!!!!!!!!!!!!!!!!!!!!!!!!!!!############--------------")
+# Sample DataFrames
+df1 = pd.DataFrame({
+    'A': ['A0', 'A1', 'A2']
+})
+
+df2 = pd.DataFrame({
+    'B': ['B0', 'B1', 'B2']
+})
+
+df2 = pd.DataFrame({
+    'B': ['B0', 'B1', 'B2']
+})
+
+# Concatenate DataFrames by columns
+result = pd.concat([df1, df2], axis=1)
+
+# Display the result
+print(result)
+
+print("AAAAALLLLLLLICE")
+
+# Accessing rows by label
+alice_row = df[df['Name'] == 'Alice']
+print(alice_row)
